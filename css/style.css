@@ -84,10 +84,9 @@ body,
 	/* text-shadow: 0.125rem 0.125rem 0px #6d1500; */
 }
 .lolgBox {
-	float: right;
-	display: inline-block;
-	height: 3.125rem;
-	
+    position: absolute;
+    right: 20px;  /* Move it left */
+    top: 10px;    /* Move it down */
 }
 .lolgBox img {
 	height: 100%;
@@ -123,10 +122,11 @@ body,
 }
 
 .controlsBoxLeft {
-	position: absolute;
-	left: 0.625rem;
-	/* background: #0056B3; */
+    position: absolute;
+    left: 20px; /* Move it right */
+    top: 20px;  /* Move it down */
 }
+
 .controlsBox ul {
 	list-style: none;
 	margin-bottom: 0rem;
