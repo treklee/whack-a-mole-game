@@ -114,10 +114,14 @@ body,
 
 /* 功能控件按钮 */
 .controlsBox {
-	position: absolute;
-	right: 0.625rem;
-	/* background: #0056B3; */
+    position: relative; /* Change from absolute to relative */
+    top: 10px; /* Adjust this value to move it down */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px; /* Push it below the header */
 }
+
 .controlsBoxLeft {
 	position: absolute;
 	left: 0.625rem;
