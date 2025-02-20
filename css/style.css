@@ -30,9 +30,9 @@ body,
 }
 
 .GameHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 100%;
+	/* background: #9FCDFF; */
+	padding: 1rem 0.625rem 0.3125rem;
 }
 
 /* 分数盒子 */
@@ -84,9 +84,10 @@ body,
 	/* text-shadow: 0.125rem 0.125rem 0px #6d1500; */
 }
 .lolgBox {
-    position: absolute;
-    right: 20px;  /* Move it left */
-    top: 10px;    /* Move it down */
+	float: right;
+	display: inline-block;
+	height: 3.125rem;
+	
 }
 .lolgBox img {
 	height: 100%;
@@ -113,17 +114,16 @@ body,
 
 /* 功能控件按钮 */
 .controlsBox {
-    position: absolute; /* Change from relative */
-    top: 10px;
-    right: 10px;
+	position: absolute;
+	right: 0.625rem;
+	/* background: #0056B3; */
 }
 
 .controlsBoxLeft {
-    position: absolute;
-    left: 20px; /* Move it right */
-    top: 20px;  /* Move it down */
+	position: absolute;
+	left: 0.625rem;
+	/* background: #0056B3; */
 }
-
 .controlsBox ul {
 	list-style: none;
 	margin-bottom: 0rem;
@@ -135,10 +135,16 @@ body,
 }
 
 #musicBtn {
-    z-index: 10;
-    position: absolute;
-    right: 50px;
-    top: 10px;
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: transparent;
+	background-image: url(../image/iconMis.png);
+	background-position: 0rem 0rem;
+	background-repeat: no-repeat;
+	background-clip: content-box;
+	background-size: 100% auto;
+	border: none;
+	margin-left: 10px; /* Space between icons */
 }
 
 #musicBtn:focus {
