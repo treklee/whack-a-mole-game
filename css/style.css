@@ -101,7 +101,8 @@ body,
 	font-size: 0.875rem;
 	line-height: 1.5625rem;
 	color: #da6344;
-	margin-top: 0.25rem;
+	/* margin-top: 0.25rem; */
+	margin-top: 15px; /* Move it down */
 }
 
 .timeNum {
@@ -142,6 +143,7 @@ body,
 	background-clip: content-box;
 	background-size: 100% auto;
 	border: none;
+	margin-left: 10px; /* Space between icons */
 }
 
 #musicBtn:focus {
