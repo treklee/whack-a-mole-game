@@ -94,17 +94,19 @@ body,
 	width: auto;
 }
 
-/* Move timeBox below the header */
+/* Adjust the timeBox positioning to go below header and to the left */
 .timeBox {
-    display: block;  /* Change from inline-block to block */
+    display: block;
+    position: absolute;
+    left: 0.625rem;  /* Same left positioning as controlsBoxLeft */
+    top: 7rem;      /* Position it below the header */
     border-radius: 2rem;
     padding-left: 0.625rem;
     font-size: 0.875rem;
     line-height: 1.5625rem;
     color: #da6344;
-    margin-top: 3.5rem;  /* Increase top margin to move below header */
-    clear: both;  /* Ensure it clears any floated elements */
-    text-align: center;  /* Center it horizontally */
+    text-align: left;  /* Align text to the left */
+    z-index: 10;      /* Ensure it's above other elements */
 }
 
 .timeNum {
