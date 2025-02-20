@@ -94,15 +94,17 @@ body,
 	width: auto;
 }
 
+/* Move timeBox below the header */
 .timeBox {
-	display: inline-block;
-	border-radius: 2rem;
-	padding-left: 0.625rem;
-	font-size: 0.875rem;
-	line-height: 1.5625rem;
-	color: #da6344;
-	/* margin-top: 0.25rem; */
-	margin-top: 15px; /* Move it down */
+    display: block;  /* Change from inline-block to block */
+    border-radius: 2rem;
+    padding-left: 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.5625rem;
+    color: #da6344;
+    margin-top: 3.5rem;  /* Increase top margin to move below header */
+    clear: both;  /* Ensure it clears any floated elements */
+    text-align: center;  /* Center it horizontally */
 }
 
 .timeNum {
@@ -113,17 +115,19 @@ body,
 }
 
 /* 功能控件按钮 */
+/* Adjust the controls position */
 .controlsBox {
-	position: absolute;
-	right: 0.625rem;
-	/* background: #0056B3; */
+    position: absolute;
+    right: 0.625rem;
+    top: 5rem;  /* Move down from top */
 }
 
 .controlsBoxLeft {
-	position: absolute;
-	left: 0.625rem;
-	/* background: #0056B3; */
+    position: absolute;
+    left: 0.625rem;
+    top: 5rem;  /* Move down from top */
 }
+
 .controlsBox ul {
 	list-style: none;
 	margin-bottom: 0rem;
@@ -134,17 +138,20 @@ body,
 	text-align: center;
 }
 
+/* Make sure music button aligns properly */
 #musicBtn {
-	width: 2.5rem;
-	height: 2.5rem;
-	background-color: transparent;
-	background-image: url(../image/iconMis.png);
-	background-position: 0rem 0rem;
-	background-repeat: no-repeat;
-	background-clip: content-box;
-	background-size: 100% auto;
-	border: none;
-	margin-left: 10px; /* Space between icons */
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    background-image: url(../image/iconMis.png);
+    background-position: 0rem 0rem;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-size: 100% auto;
+    border: none;
+    margin-left: 10px;
+    display: block;  /* Change to block if needed */
+    margin-top: 1rem;  /* Add some top margin */
 }
 
 #musicBtn:focus {
