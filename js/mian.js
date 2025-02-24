@@ -49,23 +49,26 @@ function timer(intDiff) {
 		$(".timeNum").text(second);
 		intDiff--;
 		// 判断当秒数为0的时候停止运行
+
 		if (second == 00) {
-			clearInterval(timing);
-			clearInterval(circle);
-			console.log(second + "秒，被停止");
-			// 设置延时500毫秒，防止错误视觉交互，
-			setTimeout(function() {
-				// 展示结束UI
-				$(".gameOverBox").show();
-				$('#settlementNum').text($(".scoreNum").text());
-				
-				// 输出事件
-				// alert(JSON.stringify(gameOv));
-				$(".scoreBox").toggle();
-				$(".listBOx").toggle();
-				$(".lolgBox").toggle();
-			}, 500)
-		}
+		    clearInterval(timing);
+		    clearInterval(circle);
+		    console.log(second + "秒，被停止");
+		    
+		    // Add this line to store final score
+		    var finalScore = s;
+		    
+		    setTimeout(function() {
+		        $(".gameOverBox").show();
+		        // Change this line
+		        $('#settlementNum').text(finalScore);  // Instead of .text($(".scoreNum").text())
+		        
+		        $(".scoreBox").toggle();
+		        $(".listBOx").toggle();
+		        $(".lolgBox").toggle();
+		    }, 500)
+		}		
+
 	}, 1000);
 }
 
@@ -98,16 +101,22 @@ $(".start").on("click", function() {
 
 // 重新开始函数
 $(".restart").on("click", function() {
-	// 防止多次点击
-	console.log("执行重新开始玩");
-		$(".gameOverBox").hide();
-		$(".scoreNum").text("0");
-		$(".timeNum").text("30");
-		$(".scoreBox").toggle();
-		$(".listBOx").toggle();
-		$(".lolgBox").toggle();
-		timer(gemeTime);
-		star();
+    console.log("执行重新开始玩");
+    $(".gameOverBox").hide();
+    
+    // Add this line to explicitly reset score
+    s = 0;
+    
+    $(".scoreNum").text("0");
+    // Add this line to reset settlement display
+    $("#settlementNum").text("0");
+    $(".timeNum").text("30");
+    
+    $(".scoreBox").toggle();
+    $(".listBOx").toggle();
+    $(".lolgBox").toggle();
+    timer(gemeTime);
+    star();
 })
 
 // 榜单按钮
