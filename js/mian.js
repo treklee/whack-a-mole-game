@@ -25,10 +25,25 @@ var BtnOn;
 function rand(min, max) {
 	return Math.round(Math.random() * (max - min) + min);
 }
+
+
+// 1. Character appearance interval - increase these values to slow down
+// Original fast values:
 // var secs = rand(800, 1000);
-var secs = rand(500, 800);
-var stay = rand(150, 250);
+// var secs = rand(500, 800);
+
+// Modified slower values:
+var secs = rand(1000, 1500); // Double the interval between appearances
+
+// 2. Character stay duration - increase these values to make them stay longer
+// Original fast values:
+// var stay = rand(150, 250);
 // var stay = rand(1500, 2050);
+
+// Modified slower values:
+var stay = rand(400, 600); // Make characters stay visible longer
+
+
 // 时间倒计时函数
 function timer(intDiff) {
 	var timing = window.setInterval(function() {
@@ -298,10 +313,10 @@ function star() {
 							newImg.style.display = 'none';
 							newImg.remove();
 						}
-					}, 50)
+					}, 100)
 				}, stay)
 			}
-		}, 50);
+		}, 100);
 		// 
 		// console.log("总弹出：" + (Htc + Xtc) + "次,大灰狼弹出" + Htc + "次,小灰狼弹出" + Xtc + "次")
 	}, secs)
