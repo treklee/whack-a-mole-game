@@ -3,50 +3,33 @@ $(function() {
 	function autoRootFontSize() {
 		document.documentElement.style.fontSize = Math.min(screen.width, document.documentElement.getBoundingClientRect().width) /
 			750 * 32 + 'px';
-		// 取screen.width和document.documentElement.getBoundingClientRect().width的最小值；除以750，乘以32；懂的起撒，就是原本是750大小的32px;如果屏幕大小变成了375px,那么字体就是16px;也就是根字体fontSize大小和屏幕大小成正比变化！是不是很简单
-		// console.log(document.documentElement.style.fontSize)
 	}
 	window.addEventListener('resize', autoRootFontSize);
 	autoRootFontSize();
 })
 
 // 给游戏限制一个运行的时间
-// var gemeTime = $(".timeNum").text();
 var gemeTime = "30";
 var s = 0;
 var BtnOn;
 
-// Add variables for accuracy tracking
-var totalWolves = 0;
+// Track hits, misses, and total appearances for accuracy calculation
+var totalHits = 0;
 var correctHits = 0;
-var incorrectHits = 0;
-var missedWolves = 0;
+var wrongHits = 0;
 
 // 随机函数
 function rand(min, max) {
 	return Math.round(Math.random() * (max - min) + min);
 }
 
-// 1. Character appearance interval - increase these values to slow down
-var secs = rand(700, 800); // Interval between appearances
-
-// 2. Character stay duration - increase these values to make them stay longer
+var secs = rand(700, 800); // Double the interval between appearances
 var stay = rand(200, 400); // Make characters stay visible longer
 
 // Calculate accuracy percentage
 function calculateAccuracy() {
-    if (totalWolves === 0) return 100;
-    // Calculate based on correct hits vs total wolves
-    var accuracy = (correctHits / totalWolves) * 100;
-    // Subtract penalties for incorrect hits
-    accuracy = Math.max(0, accuracy - (incorrectHits / totalWolves) * 100);
-    return Math.round(accuracy);
-}
-
-// Update accuracy display
-function updateAccuracyDisplay() {
-    var accuracy = calculateAccuracy();
-    $(".accuracyNum").text(accuracy);
+    if (totalHits === 0) return 0;
+    return Math.round((correctHits / totalHits) * 100);
 }
 
 // 时间倒计时函数
@@ -64,28 +47,25 @@ function timer(intDiff) {
 		}
 		if (minute <= 9) minute = '0' + minute;
 		if (second <= 9) second = '0' + second;
-		// 赋值给页面，倒计时时间。
+		
 		$(".timeNum").text(second);
 		intDiff--;
+		
 		// 判断当秒数为0的时候停止运行
-
 		if (second == 00) {
 		    clearInterval(timing);
 		    clearInterval(circle);
 		    console.log(second + "秒，被停止");
 		    
-		    // Store final score and accuracy
-		    var finalScore = s;
+		    // Calculate final accuracy
 		    var finalAccuracy = calculateAccuracy();
 		    
 		    setTimeout(function() {
 		        $(".gameOverBox").show();
-		        // Update score and accuracy on game over screen
-		        $('#settlementNum').text(finalScore);
-		        $('#settlementAccuracy').text(finalAccuracy);
+		        // Display accuracy instead of score
+		        $('#settlementNum').text(finalAccuracy + "%");
 		        
 		        $(".scoreBox").toggle();
-		        $(".accuracyBox").toggle();
 		        $(".listBOx").toggle();
 		        $(".lolgBox").toggle();
 		    }, 500)
@@ -113,6 +93,11 @@ $(".start").on("click", function() {
 	// 按钮移除开始框
 	$(".startBox").hide();
 	
+	// Reset tracking variables
+	totalHits = 0;
+	correctHits = 0;
+	wrongHits = 0;
+	
 	// 获取游戏执行倒计时
 	timer(gemeTime);
 	star(); // 第一次游戏的函数
@@ -123,21 +108,18 @@ $(".restart").on("click", function() {
     console.log("执行重新开始玩");
     $(".gameOverBox").hide();
     
-    // Reset score and accuracy metrics
-    s = 0;
-    totalWolves = 0;
+    // Reset tracking variables
+    totalHits = 0;
     correctHits = 0;
-    incorrectHits = 0;
-    missedWolves = 0;
+    wrongHits = 0;
+    s = 0;
     
     $(".scoreNum").text("0");
-    $(".accuracyNum").text("100");
-    $("#settlementNum").text("0");
-    $("#settlementAccuracy").text("100");
+    // Reset settlement display
+    $("#settlementNum").text("0%");
     $(".timeNum").text("30");
     
     $(".scoreBox").toggle();
-    $(".accuracyBox").toggle();
     $(".listBOx").toggle();
     $(".lolgBox").toggle();
     timer(gemeTime);
@@ -155,7 +137,9 @@ $(".btn_ranking").on("click", function() {
 function star() {
 	var Htc = 0;
 	var Xtc = 0;
-	var audioNum = 0
+	var audioNum = 0;
+	var missedTargets = 0;
+	
 	//=============================================================================游戏进行时
 	circle = setInterval(function() {
 		//灰太狼随机出现的位置
@@ -228,11 +212,8 @@ function star() {
 		// 选择灰太狼还是小灰灰
 		var X = rand(0, 1);
 		
-		// Track total wolves that appear
-		totalWolves++;
-		
-		// Update accuracy display after each wolf appears
-		updateAccuracyDisplay();
+		// Track if this target was clicked
+		var wasClicked = false;
 		
 		// 当X<1的时候，选择正确
 		if (X == 1) {
@@ -244,13 +225,9 @@ function star() {
 			// 否则错误
 			X = 'x';
 		}
-		
 		var y = 0;
 		// 图片设置为可见
 		newImg.style.display = 'block';
-		// Flag to track if this wolf was hit
-		var wasHit = false;
-		
 		var appear0 = setInterval(function() {
 			newImg.src = 'image/' + X + y + '.png';
 			// 当前程序没执行一次，加一
@@ -259,16 +236,18 @@ function star() {
 			var indexs = 0;
 			// 当img被点击执行函数
 			newImg.onclick = function() {
+				// Mark as clicked
+				wasClicked = true;
+				
+				// Increment total hits counter
+				totalHits++;
+				
 				// 鼠标被点击条件加一
 				indexs++;
 				if (indexs > 1) {
 					// 鼠标只能点击1次 而不能无限点
 					return false;
 				}
-				
-				// Mark that this wolf was hit
-				wasHit = true;
-				
 				// y等于第五帧动画图片
 				y = 5;
 				// 执行图片被点击的动画
@@ -283,13 +262,13 @@ function star() {
 				};
 				// 当点击图片是正确
 				if (X == 'h') {
-					// Track correct hit
+					// Increment correct hits counter
 					correctHits++;
 					
 					// 添加分数
 					s += 10;
 					// 将当前的数值赋值到HTML分数中显示
-					$(".scoreNum").text(s);
+					$(".scoreNum").text(calculateAccuracy() + "%");
 					// 播放一次音乐
 					audioNum++;
 					var audioS = '<audio class="second" id="secondAudio' + audioNum +
@@ -302,8 +281,8 @@ function star() {
 						}
 					});
 				} else if (X == 'x') {
-					// Track incorrect hit
-					incorrectHits++;
+					// Increment wrong hits counter
+					wrongHits++;
 					
 					// 反之单错了执行
 					s -= 10;
@@ -311,7 +290,7 @@ function star() {
 						s = 0;
 					}
 					// 将当前错误的数值，赋值到HTML分数中显示
-					$(".scoreNum").text(s);
+					$(".scoreNum").text(calculateAccuracy() + "%");
 					// 执行一次音乐
 					audioNum++;
 					var audioS = '<audio class="second" id="secondAudio' + audioNum +
@@ -324,9 +303,6 @@ function star() {
 						}
 					});
 				}
-				
-				// Update accuracy after each hit
-				updateAccuracyDisplay();
 			};
 
 			if (y > 5) {
@@ -339,31 +315,24 @@ function star() {
 						if (y < 0) {
 							clearInterval(appear1);
 							newImg.style.display = 'none';
-							newImg.remove();
 							
-							// If wolf wasn't hit, count as missed
-							if (!wasHit) {
-								if (X == 'h') {
-									missedWolves++;
-									// Update accuracy because we missed a wolf
-									updateAccuracyDisplay();
-								}
+							// Count missed targets (only for the wolf that should be hit)
+							if (!wasClicked && X == 'h') {
+								totalHits++; // We count misses in total attempts
 							}
+							
+							// Update score display with current accuracy
+							$(".scoreNum").text(calculateAccuracy() + "%");
+							
+							newImg.remove();
 						}
 					}, 100)
 				}, stay)
 			}
 		}, 100);
-		
 	}, secs)
 	
-	// Reset score and accuracy metrics
+	// Reset accuracy and score at game start
 	s = 0;
-	totalWolves = 0;
-	correctHits = 0;
-	incorrectHits = 0;
-	missedWolves = 0;
-	$(".scoreNum").text(s);
-	$(".accuracyNum").text("100");
-	//=============================================================================游戏结束
+	$(".scoreNum").text("0%");
 }
