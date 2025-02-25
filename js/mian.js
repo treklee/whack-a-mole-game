@@ -336,3 +336,10 @@ function star() {
 	s = 0;
 	$(".scoreNum").text("0%");
 }
+
+// Analysis button click handler
+$(".analysis").on("click", function() {
+    // Replace with your desired URL
+    window.location.href = "https://www.sooooz.com";
+});
+
