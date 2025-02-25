@@ -33,7 +33,7 @@ function rand(min, max) {
 // var secs = rand(500, 800);
 
 // Modified slower values:
-var secs = rand(1000, 1500); // Double the interval between appearances
+var secs = rand(800, 1300); // Double the interval between appearances
 
 // 2. Character stay duration - increase these values to make them stay longer
 // Original fast values:
