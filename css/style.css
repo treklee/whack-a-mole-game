@@ -1,306 +1,275 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-}
+* {margin: 0;padding: 0;}
 
 ul {
-  list-style: none;
+	list-style: none;
 }
-
-img {
-  max-width: 100%;
-  height: auto;
+img{
+	/* outline: none;
+    border-style:none;
+    border-width:0;
+	background-color: transparent; */
 }
-
-button:focus {
-  outline: none;
+button:focus{
+	outline: none
 }
-
 html,
 body,
 .GameBoxBg {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
-/* Game background */
+/* 重绘背景图片 */
 .GameBoxBg {
-  background-image: url(../image/GameBg.jpg);
-  background-position: left top;
-  background-size: 100% auto;
-  background-origin: content-box;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
+	background-image: url(../image/GameBg.jpg);
+	background-position:left top;
+	background-size: 100% auto;
+	background-origin: content-box;
+	background-repeat: no-repeat;
+	position: relative;
 }
 
-/* Header section */
 .GameHeader {
-  width: 100%;
-  padding: 1rem 0.625rem 0.3125rem;
-  display: flex;
-  justify-content: space-between;
+	width: 100%;
+	/* background: #9FCDFF; */
+	padding: 1rem 0.625rem 0.3125rem;
 }
 
-/* Score and accuracy boxes */
-.scoreBox, .accuracyBox {
-  display: inline-block;
-  padding: 0.25rem 0.625rem;
-  border-radius: 2rem;
-  background-color: #da6344;
-  border: 0.0625rem solid #e7e7e7;
-  font-size: 0.75rem;
-  box-shadow: 0.0625rem 0.0625rem 0.0625rem rgba(0, 0, 0, 0.4);
-  margin-right: 0.5rem;
-}
-
+/* 分数盒子 */
 .scoreBox {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+	display: inline-block;
+	padding: 0.25rem 0.625rem;
+	border-radius: 2rem;
+	border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+	background-color: #da6344;
+	border: 0.0625rem solid #e7e7e7;
+	font-size: 0.75rem;
+	box-shadow: 0.0625rem 0.0625rem 0.0625rem rgba(0, 0, 0, 0.4);
+	
 }
 
-.accuracyBox {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+.scoreTitle {
+	color: #fff;
+	font-size: 0.75rem;
+	text-shadow: 0rem 0.0625rem 0.125rem 0.3125rem #e97c00;
+	font-weight: bold;
 }
 
-.scoreTitle, .accuracyTitle {
-  color: #fff;
-  font-size: 0.75rem;
-  text-shadow: 0 0.0625rem 0.125rem rgba(233, 124, 0, 0.8);
-  font-weight: bold;
+.scoreNum {
+	color: #fff500;
+	font-weight: bold;
+	/* text-shadow: 0.125rem 0.125rem 0px #6d1500; */
 }
-
-.scoreNum, .accuracyNum {
-  color: #fff500;
-  font-weight: bold;
+.ctBox{
+	display: inline-block;
+    padding: 0.25rem 0.625rem;
+    border-radius: 2rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #db6244;
+    border: 0.0625rem solid #e7e7e7;
+    font-size: 0.75rem;
+	font-weight: bold;
+    box-shadow: 0.0625rem 0.0625rem 0.0625rem rgba(0, 0, 0, 0.4);
 }
-
+.ctBox p{
+	margin-bottom: 0;
+	color: #fff;
+    font-size: 0.75rem;
+}
+.ctBox p span{
+	color: #fff500;
+	font-weight: bold;
+	/* text-shadow: 0.125rem 0.125rem 0px #6d1500; */
+}
 .lolgBox {
-  float: right;
-  display: inline-block;
-  height: 3.125rem;
+	float: right;
+	display: inline-block;
+	height: 3.125rem;
+	
 }
-
 .lolgBox img {
-  height: 100%;
-  width: auto;
+	height: 100%;
+	width: auto;
 }
 
-/* Time display */
-.listBOx {
-  position: relative;
-}
-
+/* Adjust the timeBox positioning to go below header and to the left */
 .timeBox {
-  display: block;
-  margin-top: 0.5rem;
-  border-radius: 2rem;
-  padding: 0.325rem 0.625rem;
-  font-size: 0.875rem;
-  line-height: 1.5625rem;
-  color: #da6344;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 0.0625rem solid #e7e7e7;
-  box-shadow: 0.0625rem 0.0625rem 0.0625rem rgba(0, 0, 0, 0.4);
+    display: block;
+    position: absolute;
+    left: 0.625rem;  /* Same left positioning as controlsBoxLeft */
+    top: 6rem;      /* Position it below the header */
+    border-radius: 2rem;
+    padding-left: 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.5625rem;
+    color: #da6344;
+    text-align: left;  /* Align text to the left */
+    z-index: 10;      /* Ensure it's above other elements */
 }
 
 .timeNum {
-  color: #da6344;
-  font-weight: bold;
-  text-shadow: 0.125rem 0.125rem 0 #6d1500;
-  font-size: 1.5625rem;
+	color: #da6344;
+	font-weight: bold;
+	text-shadow: 0.125rem 0.125rem 0px #6d1500;
+	font-size: 1.5625rem;
 }
 
-/* Control buttons */
+/* 功能控件按钮 */
+/* Adjust the controls position */
 .controlsBox {
-  position: absolute;
-  right: 0.625rem;
-  top: 5rem;
-  z-index: 10;
+    position: absolute;
+    right: 0.625rem;
+    top: 5rem;  /* Move down from top */
+}
+
+.controlsBoxLeft {
+    position: absolute;
+    left: 0.625rem;
+    top: 5rem;  /* Move down from top */
 }
 
 .controlsBox ul {
-  margin-bottom: 0;
+	list-style: none;
+	margin-bottom: 0rem;
 }
 
 .controlsBox ul li {
-  margin-bottom: 0.25rem;
-  text-align: center;
+	margin-bottom: 0.25rem;
+	text-align: center;
 }
 
-/* Music button */
+/* Make sure music button aligns properly */
 #musicBtn {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: transparent;
-  background-image: url(../image/iconMis.png);
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  background-clip: content-box;
-  background-size: 100% auto;
-  border: none;
-  display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    background-image: url(../image/iconMis.png);
+    background-position: 0rem 0rem;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-size: 100% auto;
+    border: none;
+    margin-left: 10px;
+    display: block;  /* Change to block if needed */
+    margin-top: 1rem;  /* Add some top margin */
 }
 
+#musicBtn:focus {
+	outline: none
+}
+/* 音乐切换图标 */
 .musicS {
-  background-position: 0 -2.5rem !important;
+	background-position: 0rem -2.5rem !important;
 }
-
-/* Ranking button */
-.rankingBox p {
-  font-size: 0.75rem;
-  color: #FFFFFF;
-  margin-bottom: 0;
-  line-height: 0.75rem;
-  margin-top: -0.125rem;
+.rankingBox p{
+	font-size: 0.75rem;
+	color: #FFFFFF;
+	margin-bottom:0;
+	line-height: 0.75rem;
+	margin-top: -0.125rem;
 }
-
-.btn_ranking {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: transparent;
-  background-image: url(../image/ranking.png);
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  background-clip: content-box;
-  background-size: 100% auto;
-  border: none;
+.btn_ranking{
+	width: 2.5rem;
+	height: 2.5rem;
+	background-color: transparent;
+	background-image: url(../image/ranking.png);
+	background-position: 0rem 0rem;
+	background-repeat: no-repeat;
+	background-clip: content-box;
+	background-size: 100% auto;
+	border: none;
 }
-
-/* Game rules modal */
+/* gameRules游戏规则弹窗样式 */
+.gameRules {}
 .gameRules .modal-content .modal-header h5 {
-  margin-bottom: 0;
-  background: linear-gradient(-45deg, rgba(255, 162, 17, 1) 0%, rgba(255, 118, 66, 1) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
+	margin-bottom: 0;
+	background: linear-gradient(-45deg, rgba(255, 162, 17, 1) 0%, rgba(255, 118, 66, 1) 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	text-fill-color: transparent;
+	-webkit-text-fill-color: transparent;
+	font-weight: bold;
 }
 
-.close:focus {
-  outline: none;
+.close:focus{
+	outline:none
 }
-
-/* Start button */
-.startBox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 100;
+.start{
+	width: 15.625rem;
+    border: 0;
+    border-radius: 1.875rem;
+    background: linear-gradient(to top, #f9c000,#fae900);
+	box-shadow: 0rem 0.1875rem 0 0.125rem #ee9003;
+    margin: 0 auto;
+    font-size: 2.1875rem;
+	font-weight: bold;
+    position: absolute;
+    color: #d45200;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 26.8125rem;
 }
-
-.start {
-  width: 15.625rem;
-  border: 0;
-  border-radius: 1.875rem;
-  background: linear-gradient(to top, #f9c000, #fae900);
-  box-shadow: 0 0.1875rem 0 0.125rem #ee9003;
-  font-size: 2.1875rem;
-  font-weight: bold;
-  color: #d45200;
-  padding: 0.5rem 0;
-  margin-bottom: 2rem;
-}
-
-/* Game over */
-.gameOverBox {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.over {
-  font-weight: bold;
-  font-size: 3.75rem;
-  text-shadow: 0.1875rem 0.1875rem 0 #fff;
-  background: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 0, 0, 1)), to(rgba(0, 0, 213, 1)));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 2rem;
-}
-
-.settlementBox {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.settlementTitle {
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
 .restart {
-  width: 15.625rem;
-  border: 0;
-  border-radius: 1.875rem;
-  background: linear-gradient(#f5440b, #C50000);
-  box-shadow: 0 0.1875rem 0 0.125rem #771e04;
-  font-size: 2.1875rem;
-  font-weight: bold;
-  color: #fff;
-  padding: 0.5rem 0;
-  margin-bottom: 2rem;
+    width: 15.625rem;
+    border: 0;
+    border-radius: 1.875rem;
+	background: linear-gradient(#f5440b, #C50000);
+	box-shadow: 0rem 0.1875rem 0 0.125rem #771e04;
+    font-size: 2.1875rem;
+	font-weight: bold;
+    position: absolute;
+    color: #fff;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 26.8125rem;
 }
-
-.btn_rules {
-  border: none;
-  background: transparent;
-  font-size: 1rem;
-  color: #fff;
-  text-shadow: 0 0.125rem 0 #6d1500;
-  text-decoration: underline;
+.over {
+    text-align: center;
+    position: absolute;
+    top: 15.6875rem;
+	margin: 0 auto;
+	left: 50%;
+	margin-left: -10.699375rem;
+    font-weight: bold;
+    font-size: 3.75rem;
+    text-shadow: 0.1875rem 0.1875rem 0  #fff;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 0, 0, 1)), to(rgba(0, 0, 213, 1)));
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-
-/* Media queries for better responsiveness */
-@media screen and (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-  
-  .start, .restart {
-    width: 80%;
-    max-width: 15.625rem;
-    font-size: 1.75rem;
-  }
-  
-  .over {
-    font-size: 2.5rem;
-  }
-  
-  .settlementBox {
-    font-size: 1.25rem;
-  }
+/* 被隐藏的内容 */
+.gameOverBox{
+	display: none;
 }
-
-@media screen and (max-height: 640px) {
-  .GameBoxBg {
-    background-size: auto 100%;
-  }
+.settlementBox{
+	text-align: center;
+	position: absolute;
+	top: 21.5rem;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+.settlementTitle{
+	color: #fff;
+}
+#settlementNum{
+	
+}
+.btn_rules{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 31.375rem;
+	margin: 0 auto;
+	border:none;
+	width: 4.2rem;
+	background: transparent;
+	font-size: 1rem;
+	color: #fff;
+	text-shadow: 0rem 0.125rem 0px #6d1500;
 }
