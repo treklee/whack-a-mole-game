@@ -1,3 +1,5 @@
+mixpanel.init('92dfd471e6b3954024dbc936fd33b7ad', { autocapture: true });
+
 $(function() {
 	// 处理屏幕适配
 	function autoRootFontSize() {
@@ -98,6 +100,13 @@ $("#musicBtn").on("click", function() {
 
 // 开始游戏
 $(".start").on("click", function() {
+
+    mixpanel.track("Game Started", {
+        user_id: mixpanel.get_distinct_id()
+    });
+
+
+	
 	$("#GameBGAudio")[0].play();
 	$("#musicBtn").addClass("musicS");
 	// 按钮移除开始框
