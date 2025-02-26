@@ -1,5 +1,5 @@
 $(function() {
-	mixpanel.init('92dfd471e6b3954024dbc936fd33b7ad', { autocapture: true });
+	mixpanel.init('92dfd471e6b3954024dbc936fd33b7ad', { autocapture: false });
 	// 处理屏幕适配
 	function autoRootFontSize() {
 		document.documentElement.style.fontSize = Math.min(screen.width, document.documentElement.getBoundingClientRect().width) /
@@ -366,6 +366,7 @@ function star() {
 
 // Analysis button click handler
 $(".analysis").on("click", function() {
+	mixpanel.track('Click Game Result Analysis');
     // Replace with your desired URL
     window.location.href = "https://www.sooooz.com";
 });
