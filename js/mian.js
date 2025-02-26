@@ -324,7 +324,11 @@ function star() {
 	//=============================================================================游戏结束
 }
 
-
+// Analysis button click handler
+$(".analysis").on("click", function() {
+    // Replace with your desired URL
+    window.location.href = "https://www.sooooz.com";
+});
 
 
 
