@@ -71,18 +71,15 @@ function timer(intDiff) {
 		    }, 500)
       		*/
 
-			setTimeout(function() {
-			    $(".gameOverBox").fadeIn(300); // Smoothly show gameOverBox
-			
-			    // Ensure these elements are hidden only at game end
-			    $(".scoreBox").hide();
-			    $(".listBOx").hide();
-			    $(".lolgBox").hide();
-			
-			    // Show final accuracy
-			    $('#settlementNum').text("準確度：" + finalAccuracy + "%");
-			}, 500);
-				
+		    setTimeout(function() {
+		        $(".gameOverBox").show();
+		        // Display accuracy instead of score
+		        $('#settlementNum').text(finalAccuracy + "%");
+		        
+		        $(".scoreBox").hide();
+		        $(".listBOx").hide();
+		        $(".lolgBox").hide();
+		    }, 500)
 
 			
 		}		
