@@ -1,6 +1,5 @@
-mixpanel.init('92dfd471e6b3954024dbc936fd33b7ad', { autocapture: true });
-
 $(function() {
+	mixpanel.init('92dfd471e6b3954024dbc936fd33b7ad', { autocapture: true });
 	// 处理屏幕适配
 	function autoRootFontSize() {
 		document.documentElement.style.fontSize = Math.min(screen.width, document.documentElement.getBoundingClientRect().width) /
