@@ -212,8 +212,6 @@ body,
     margin: 0 auto;
     top: 26.8125rem;
 }
-
-/*
 .restart {
     width: 15.625rem;
     border: 0;
@@ -229,31 +227,6 @@ body,
     margin: 0 auto;
     top: 26.8125rem;
 }
-*/
-
-.restart {
-    background-color: blue;
-    color: white;
-}
-
-.analysis {
-    background-color: red;
-    color: white;
-}
-
-.restart,
-.analysis {
-    display: inline-block;
-    text-align: center;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Adjust spacing between buttons */
-}
-
-
 .over {
     text-align: center;
     position: absolute;
@@ -269,24 +242,9 @@ body,
     -webkit-text-fill-color: transparent;
 }
 /* 被隐藏的内容 */
-
-.gameOverBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.gameOverBox{
+	display: none;
 }
-
-.gameOverBox button {
-    width: 120px; /* Adjust width as needed */
-    height: 40px; /* Adjust height as needed */
-    font-size: 16px;
-    margin: 5px; /* Add spacing */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-
 .settlementBox{
 	text-align: center;
 	position: absolute;
