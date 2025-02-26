@@ -3,34 +3,45 @@ $(function() {
 	function autoRootFontSize() {
 		document.documentElement.style.fontSize = Math.min(screen.width, document.documentElement.getBoundingClientRect().width) /
 			750 * 32 + 'px';
+		// 取screen.width和document.documentElement.getBoundingClientRect().width的最小值；除以750，乘以32；懂的起撒，就是原本是750大小的32px;如果屏幕大小变成了375px,那么字体就是16px;也就是根字体fontSize大小和屏幕大小成正比变化！是不是很简单
+		// console.log(document.documentElement.style.fontSize)
 	}
 	window.addEventListener('resize', autoRootFontSize);
 	autoRootFontSize();
+	
+	
 })
 
+
+
+
 // 给游戏限制一个运行的时间
+// var gemeTime = $(".timeNum").text();
 var gemeTime = "30";
 var s = 0;
 var BtnOn;
-
-// Track hits, misses, and total appearances for accuracy calculation
-var totalHits = 0;
-var correctHits = 0;
-var wrongHits = 0;
-
 // 随机函数
+
 function rand(min, max) {
 	return Math.round(Math.random() * (max - min) + min);
 }
 
+
+// 1. Character appearance interval - increase these values to slow down
+// Original fast values:
+// var secs = rand(800, 1000);
+// var secs = rand(500, 800);
+
 var secs = rand(700, 800); // Double the interval between appearances
+
+// 2. Character stay duration - increase these values to make them stay longer
+// Original fast values:
+// var stay = rand(150, 250);
+// var stay = rand(1500, 2050);
+
+// Modified slower values:
 var stay = rand(200, 400); // Make characters stay visible longer
 
-// Calculate accuracy percentage
-function calculateAccuracy() {
-    if (totalHits === 0) return 0;
-    return Math.round((correctHits / totalHits) * 100);
-}
 
 // 时间倒计时函数
 function timer(intDiff) {
@@ -47,29 +58,31 @@ function timer(intDiff) {
 		}
 		if (minute <= 9) minute = '0' + minute;
 		if (second <= 9) second = '0' + second;
-		
+		// console.log(day + "天"+hour + '时'+minute + '分'+second + '秒')
+		// 赋值给页面，倒计时时间。
 		$(".timeNum").text(second);
 		intDiff--;
-		
 		// 判断当秒数为0的时候停止运行
+
 		if (second == 00) {
 		    clearInterval(timing);
 		    clearInterval(circle);
 		    console.log(second + "秒，被停止");
 		    
-		    // Calculate final accuracy
-		    var finalAccuracy = calculateAccuracy();
+		    // Add this line to store final score
+		    var finalScore = s;
 		    
 		    setTimeout(function() {
 		        $(".gameOverBox").show();
-		        // Display accuracy instead of score
-		        $('#settlementNum').text(finalAccuracy + "%");
+		        // Change this line
+		        $('#settlementNum').text(finalScore);  // Instead of .text($(".scoreNum").text())
 		        
 		        $(".scoreBox").toggle();
 		        $(".listBOx").toggle();
 		        $(".lolgBox").toggle();
 		    }, 500)
 		}		
+
 	}, 1000);
 }
 
@@ -79,28 +92,25 @@ $("#musicBtn").on("click", function() {
 		$("#musicBtn").removeClass("musicS")
 		// 暂停音乐
 		$("#GameBGAudio")[0].pause();
+
 	} else {
 		$("#musicBtn").addClass("musicS");
 		// 背景音乐播放
 		$("#GameBGAudio")[0].play();
+
 	}
 });
 
 // 开始游戏
 $(".start").on("click", function() {
 	$("#GameBGAudio")[0].play();
-	$("#musicBtn").addClass("musicS");
-	// 按钮移除开始框
-	$(".startBox").hide();
-	
-	// Reset tracking variables
-	totalHits = 0;
-	correctHits = 0;
-	wrongHits = 0;
-	
-	// 获取游戏执行倒计时
-	timer(gemeTime);
-	star(); // 第一次游戏的函数
+		$("#musicBtn").addClass("musicS");
+		// 按钮移除开始框
+		$(".startBox").hide();
+		
+		// 获取游戏执行倒计时
+		timer(gemeTime);
+		star(); // 第一次游戏的函数
 });
 
 // 重新开始函数
@@ -108,15 +118,12 @@ $(".restart").on("click", function() {
     console.log("执行重新开始玩");
     $(".gameOverBox").hide();
     
-    // Reset tracking variables
-    totalHits = 0;
-    correctHits = 0;
-    wrongHits = 0;
+    // Add this line to explicitly reset score
     s = 0;
     
     $(".scoreNum").text("0");
-    // Reset settlement display
-    $("#settlementNum").text("0%");
+    // Add this line to reset settlement display
+    $("#settlementNum").text("0");
     $(".timeNum").text("30");
     
     $(".scoreBox").toggle();
@@ -133,13 +140,13 @@ $(".btn_ranking").on("click", function() {
 	// 执行一次获取排行数据
 })
 
+
+
 // 游戏开始函数
 function star() {
 	var Htc = 0;
 	var Xtc = 0;
-	var audioNum = 0;
-	var missedTargets = 0;
-	
+	var audioNum = 0
 	//=============================================================================游戏进行时
 	circle = setInterval(function() {
 		//灰太狼随机出现的位置
@@ -211,16 +218,15 @@ function star() {
 		newImg.style.position = 'absolute';
 		// 选择灰太狼还是小灰灰
 		var X = rand(0, 1);
-		
-		// Track if this target was clicked
-		var wasClicked = false;
-		
+		// console.log(X)
 		// 当X<1的时候，选择正确
 		if (X == 1) {
+
 			Htc++;
 			// 等于1时为正确
 			X = 'h';
 		} else {
+
 			Xtc++;
 			// 否则错误
 			X = 'x';
@@ -236,12 +242,6 @@ function star() {
 			var indexs = 0;
 			// 当img被点击执行函数
 			newImg.onclick = function() {
-				// Mark as clicked
-				wasClicked = true;
-				
-				// Increment total hits counter
-				totalHits++;
-				
 				// 鼠标被点击条件加一
 				indexs++;
 				if (indexs > 1) {
@@ -262,13 +262,10 @@ function star() {
 				};
 				// 当点击图片是正确
 				if (X == 'h') {
-					// Increment correct hits counter
-					correctHits++;
-					
 					// 添加分数
 					s += 10;
 					// 将当前的数值赋值到HTML分数中显示
-					$(".scoreNum").text(calculateAccuracy() + "%");
+					$(".scoreNum").text(s);
 					// 播放一次音乐
 					audioNum++;
 					var audioS = '<audio class="second" id="secondAudio' + audioNum +
@@ -281,16 +278,13 @@ function star() {
 						}
 					});
 				} else if (X == 'x') {
-					// Increment wrong hits counter
-					wrongHits++;
-					
 					// 反之单错了执行
 					s -= 10;
 					if (s <= 0) {
 						s = 0;
 					}
 					// 将当前错误的数值，赋值到HTML分数中显示
-					$(".scoreNum").text(calculateAccuracy() + "%");
+					$(".scoreNum").text(s);
 					// 执行一次音乐
 					audioNum++;
 					var audioS = '<audio class="second" id="secondAudio' + audioNum +
@@ -311,35 +305,26 @@ function star() {
 					y = 5;
 					var appear1 = setInterval(function() {
 						newImg.src = 'image/' + X + y + '.png';
+						// console.log(y);
 						y--;
 						if (y < 0) {
 							clearInterval(appear1);
 							newImg.style.display = 'none';
-							
-							// Count missed targets (only for the wolf that should be hit)
-							if (!wasClicked && X == 'h') {
-								totalHits++; // We count misses in total attempts
-							}
-							
-							// Update score display with current accuracy
-							$(".scoreNum").text(calculateAccuracy() + "%");
-							
 							newImg.remove();
 						}
 					}, 100)
 				}, stay)
 			}
 		}, 100);
+		// 
+		// console.log("总弹出：" + (Htc + Xtc) + "次,大灰狼弹出" + Htc + "次,小灰狼弹出" + Xtc + "次")
 	}, secs)
-	
-	// Reset accuracy and score at game start
 	s = 0;
-	$(".scoreNum").text("0%");
+	$(".scoreNum").text(s);
+	//=============================================================================游戏结束
 }
 
-// Analysis button click handler
-$(".analysis").on("click", function() {
-    // Replace with your desired URL
-    window.location.href = "https://www.sooooz.com";
-});
+
+
+
 
