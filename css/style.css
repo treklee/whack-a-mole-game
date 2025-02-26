@@ -231,7 +231,7 @@ body,
 }
 */
 
-/*
+
 .analysis {
     width: 7.5rem;
     border: 0;
@@ -247,10 +247,10 @@ body,
     top: 26.8125rem;
     padding: 0.5rem 0;
 }
-*/
+
 
 /* Adjust the restart button to align with the new layout */
-/*
+
 .restart {
     width: 7.5rem;
     left: 25%;
@@ -258,7 +258,7 @@ body,
     font-size: 1.5rem;
     padding: 0.5rem 0;
 }
-*/
+
 
 
 .over {
@@ -312,38 +312,3 @@ body,
 	color: #fff;
 	text-shadow: 0rem 0.125rem 0px #6d1500;
 }
-
-
-.button-container {
-    display: flex;
-    justify-content: center;  /* Center the buttons horizontally */
-    gap: 1rem;  /* Space between buttons */
-    position: absolute;
-    top: 26.8125rem;  /* Keep the existing top position */
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.restart,
-.analysis {
-    width: 7.5rem;
-    border: 0;
-    border-radius: 1.875rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 0.5rem 0;
-    text-align: center;
-}
-
-.restart {
-    background: linear-gradient(#f5440b, #C50000);
-    box-shadow: 0rem 0.1875rem 0 0.125rem #771e04;
-    color: #fff;
-}
-
-.analysis {
-    background: linear-gradient(#2196F3, #0D47A1);
-    box-shadow: 0rem 0.1875rem 0 0.125rem #083378;
-    color: #fff;
-}
-
