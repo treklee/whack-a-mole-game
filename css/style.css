@@ -231,20 +231,6 @@ body,
 }
 */
 
-.over {
-    text-align: center;
-    position: absolute;
-    top: 15.6875rem;
-	margin: 0 auto;
-	left: 50%;
-	margin-left: -10.699375rem;
-    font-weight: bold;
-    font-size: 3.75rem;
-    text-shadow: 0.1875rem 0.1875rem 0  #fff;
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 0, 0, 1)), to(rgba(0, 0, 213, 1)));
-	-webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 /* 被隐藏的内容 */
 /*
@@ -253,38 +239,61 @@ body,
 }
 */
 
-.settlementBox{
-	text-align: center;
-	position: absolute;
-	top: 21.5rem;
-	width: 100%;
-	margin: 0 auto;
-	font-size: 1.5rem;
-	font-weight: bold;
-}
-.settlementTitle{
-	color: #fff;
-}
+
 #settlementNum{
 	
 }
 
-.btn_rules{
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 31.375rem;
-	margin: 0 auto;
-	border:none;
-	width: 4.2rem;
-	background: transparent;
-	font-size: 1rem;
-	color: #fff;
-	text-shadow: 0rem 0.125rem 0px #6d1500;
+
+/* new */
+
+/* Add these styles to your CSS file */
+
+/* Game over styling */
+.gameOverBox {
+    display: none;
+    position: fixed;  /* Changed from absolute to fixed */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
 }
 
+.over {
+    text-align: center;
+    position: absolute;
+    top: 15.6875rem;
+    margin: 0 auto;
+    left: 50%;
+    margin-left: -10.699375rem;
+    font-weight: bold;
+    font-size: 3.75rem;
+    text-shadow: 0.1875rem 0.1875rem 0 #fff;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 0, 0, 1)), to(rgba(0, 0, 213, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 101;  /* Ensure text is above the background */
+}
 
-/* Updated restart button styles to align with analysis button */
+.settlementBox {
+    text-align: center;
+    position: absolute;
+    top: 21.5rem;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 101;  /* Ensure content is above the background */
+}
+
+.settlementTitle {
+    color: #fff;
+    text-shadow: 0.125rem 0.125rem 0 #000;  /* Add text shadow for better visibility */
+}
+
+/* Updated restart button styles */
 .restart {
     width: 7.5rem;
     border: 0;
@@ -296,9 +305,10 @@ body,
     position: absolute;
     color: #fff;
     left: 25%;
-    margin: 0 auto;
+    margin-left: -3.75rem;  /* Center properly */
     top: 26.8125rem;
     padding: 0.5rem 0;
+    z-index: 101;  /* Ensure button is above the background */
 }
 
 .analysis {
@@ -312,20 +322,25 @@ body,
     position: absolute;
     color: #fff;
     right: 25%;
-    margin: 0 auto;
+    margin-right: -3.75rem;  /* Center properly */
     top: 26.8125rem;
     padding: 0.5rem 0;
+    z-index: 101;  /* Ensure button is above the background */
 }
 
-/* Game over styling */
-.gameOverBox {
-    display: none;
+.btn_rules {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
     left: 0;
-    z-index: 100;
+    right: 0;
+    top: 31.375rem;
+    margin: 0 auto;
+    border: none;
+    width: 4.2rem;
+    background: transparent;
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 0rem 0.125rem 0px #6d1500;
+    z-index: 101;  /* Ensure button is above the background */
 }
 
 
