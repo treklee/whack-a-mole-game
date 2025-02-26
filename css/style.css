@@ -245,6 +245,7 @@ body,
 .gameOverBox{
 	display: none;
 }
+/*
 .settlementBox{
 	text-align: center;
 	position: absolute;
@@ -254,6 +255,7 @@ body,
 	font-size: 1.5rem;
 	font-weight: bold;
 }
+*/
 .settlementTitle{
 	color: #fff;
 }
@@ -273,3 +275,48 @@ body,
 	color: #fff;
 	text-shadow: 0rem 0.125rem 0px #6d1500;
 }
+
+
+
+
+/* Add these styles to your existing CSS file */
+
+.accuracyBox {
+    display: inline-block;
+    padding: 0.4rem 0.6rem;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+    min-width: 8rem;
+    text-align: center;
+}
+
+.accuracyTitle {
+    color: #333;
+    margin-right: 0.3rem;
+}
+
+.accuracyNum {
+    color: #0066cc;
+    font-size: 1.2rem;
+}
+
+/* Adjust the settlement box to accommodate accuracy */
+.settlementBox {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+    width: 80%;
+    max-width: 20rem;
+}
+
+#settlementAccuracy {
+    color: #0066cc;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
+
+
