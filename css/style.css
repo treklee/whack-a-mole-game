@@ -231,32 +231,27 @@ body,
 }
 */
 
-.analysis {
-    width: 7.5rem;
-    border: 0;
-    border-radius: 1.875rem;
-    background: linear-gradient(#2196F3, #0D47A1);
-    box-shadow: 0rem 0.1875rem 0 0.125rem #083378;
-    font-size: 1.5rem;
-    font-weight: bold;
-    position: absolute;
-    color: #fff;
-    right: 25%;
-    margin: 0 auto;
-    top: 26.8125rem;
-    padding: 0.5rem 0;
-}
-
-/* Adjust the restart button to align with the new layout */
 .restart {
-    width: 7.5rem;
-    left: 25%;
-    right: auto;
-    font-size: 1.5rem;
-    padding: 0.5rem 0;
+    background-color: blue;
+    color: white;
 }
 
+.analysis {
+    background-color: red;
+    color: white;
+}
 
+.restart,
+.analysis {
+    display: inline-block;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust spacing between buttons */
+}
 
 
 .over {
@@ -274,9 +269,24 @@ body,
     -webkit-text-fill-color: transparent;
 }
 /* 被隐藏的内容 */
-.gameOverBox{
-	display: none;
+
+.gameOverBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.gameOverBox button {
+    width: 120px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    font-size: 16px;
+    margin: 5px; /* Add spacing */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 .settlementBox{
 	text-align: center;
 	position: absolute;
