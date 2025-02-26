@@ -212,6 +212,8 @@ body,
     margin: 0 auto;
     top: 26.8125rem;
 }
+
+/*
 .restart {
     width: 15.625rem;
     border: 0;
@@ -227,6 +229,35 @@ body,
     margin: 0 auto;
     top: 26.8125rem;
 }
+*/
+
+.analysis {
+    width: 7.5rem;
+    border: 0;
+    border-radius: 1.875rem;
+    background: linear-gradient(#2196F3, #0D47A1);
+    box-shadow: 0rem 0.1875rem 0 0.125rem #083378;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    color: #fff;
+    right: 25%;
+    margin: 0 auto;
+    top: 26.8125rem;
+    padding: 0.5rem 0;
+}
+
+/* Adjust the restart button to align with the new layout */
+.restart {
+    width: 7.5rem;
+    left: 25%;
+    right: auto;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+
+
 .over {
     text-align: center;
     position: absolute;
