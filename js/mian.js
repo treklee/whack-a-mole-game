@@ -32,50 +32,6 @@ function calculateAccuracy() {
     return Math.round((correctHits / totalHits) * 100);
 }
 
-/*
-// 时间倒计时函数
-function timer(intDiff) {
-	var timing = window.setInterval(function() {
-		var day = 0,
-			hour = 0,
-			minute = 0,
-			second = 0; //秒时间默认值        
-		if (intDiff > 0) {
-			day = Math.floor(intDiff / (60 * 60 * 24));
-			hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
-			minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
-			second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
-		}
-		if (minute <= 9) minute = '0' + minute;
-		if (second <= 9) second = '0' + second;
-		
-		$(".timeNum").text(second);
-		intDiff--;
-		
-		// 判断当秒数为0的时候停止运行
-		if (second == 00) {
-		    clearInterval(timing);
-		    clearInterval(circle);
-		    console.log(second + "秒，被停止");
-		    
-		    // Calculate final accuracy
-		    var finalAccuracy = calculateAccuracy();
-
-		    setTimeout(function() {
-		        $(".gameOverBox").show();
-		        // Display accuracy instead of score
-		        $('#settlementNum').text(finalAccuracy + "%");
-		        
-		        $(".scoreBox").toggle();
-		        $(".listBOx").toggle();
-		        $(".lolgBox").toggle();
-		    }, 500)
-			
-		}		
-	}, 1000);
-}
-*/
-
 function timer(intDiff) {
     var timing = window.setInterval(function() {
         var day = 0,
@@ -104,15 +60,22 @@ function timer(intDiff) {
             var finalAccuracy = calculateAccuracy();
             
             setTimeout(function() {
-                // Show game over screen
-                $(".gameOverBox").show();
+                // Make sure all game elements are properly hidden
+                $(".GameBoxBg img").remove(); // Remove all game images
+                
+                // Show game over screen with proper z-index
+                $(".gameOverBox").css({
+                    "display": "block",
+                    "z-index": "1000"
+                });
                 
                 // Display accuracy instead of score
                 $('#settlementNum').text(finalAccuracy + "%");
                 
                 // Hide other game elements
                 $(".scoreBox").hide();
-                $(".listBOx").hide();
+                $(".timeBox").hide();
+                $(".ctBox").hide();
                 $(".lolgBox").hide();
             }, 500);
         }        
@@ -150,34 +113,10 @@ $(".start").on("click", function() {
 	star(); // 第一次游戏的函数
 });
 
-/*
-// 重新开始函数
-$(".restart").on("click", function() {
-    console.log("执行重新开始玩");
-    $(".gameOverBox").hide();
-    
-    // Reset tracking variables
-    totalHits = 0;
-    correctHits = 0;
-    wrongHits = 0;
-    s = 0;
-    
-    $(".scoreNum").text("0");
-    // Reset settlement display
-    $("#settlementNum").text("0%");
-    $(".timeNum").text("30");
-    
-    $(".scoreBox").toggle();
-    $(".listBOx").toggle();
-    $(".lolgBox").toggle();
-    timer(gemeTime);
-    star();
-})
-*/
-
 // Fixed restart button function
 $(".restart").on("click", function() {
     console.log("执行重新开始玩");
+    // Properly hide game over screen
     $(".gameOverBox").hide();
     
     // Reset tracking variables
@@ -186,22 +125,24 @@ $(".restart").on("click", function() {
     wrongHits = 0;
     s = 0;
     
+    // Reset displays
     $(".scoreNum").text("0");
-    // Reset settlement display
     $("#settlementNum").text("0%");
     $(".timeNum").text("30");
     
     // Show game elements again
     $(".scoreBox").show();
-    $(".listBOx").show();
+    $(".timeBox").show();
+    $(".ctBox").show();
     $(".lolgBox").show();
     
+    // Remove any leftover game elements
+    $(".GameBoxBg img").remove();
+    
+    // Start game again
     timer(gemeTime);
     star();
 });
-
-
-
 
 // 榜单按钮
 $(".btn_ranking").on("click", function() {
@@ -419,4 +360,3 @@ $(".analysis").on("click", function() {
     // Replace with your desired URL
     window.location.href = "https://www.sooooz.com";
 });
-
