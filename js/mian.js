@@ -123,6 +123,7 @@ $(".start").on("click", function() {
 
 // Fixed restart button function
 $(".restart").on("click", function() {
+	mixpanel.track("Game Restarted");
     console.log("执行重新开始玩");
     // Properly hide game over screen
     $(".gameOverBox").hide();
