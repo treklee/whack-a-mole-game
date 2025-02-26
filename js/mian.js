@@ -32,6 +32,7 @@ function calculateAccuracy() {
     return Math.round((correctHits / totalHits) * 100);
 }
 
+/*
 // 时间倒计时函数
 function timer(intDiff) {
 	var timing = window.setInterval(function() {
@@ -59,7 +60,7 @@ function timer(intDiff) {
 		    
 		    // Calculate final accuracy
 		    var finalAccuracy = calculateAccuracy();
-		/*    
+
 		    setTimeout(function() {
 		        $(".gameOverBox").show();
 		        // Display accuracy instead of score
@@ -69,22 +70,55 @@ function timer(intDiff) {
 		        $(".listBOx").toggle();
 		        $(".lolgBox").toggle();
 		    }, 500)
-      		*/
-
-		    setTimeout(function() {
-		        $(".gameOverBox").show();
-		        // Display accuracy instead of score
-		        $('#settlementNum').text(finalAccuracy + "%");
-		        
-		        $(".scoreBox").hide();
-		        $(".listBOx").hide();
-		        $(".lolgBox").hide();
-		    }, 500)
-
 			
 		}		
 	}, 1000);
 }
+*/
+
+function timer(intDiff) {
+    var timing = window.setInterval(function() {
+        var day = 0,
+            hour = 0,
+            minute = 0,
+            second = 0; //秒时间默认值        
+        if (intDiff > 0) {
+            day = Math.floor(intDiff / (60 * 60 * 24));
+            hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+            minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+            second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+        }
+        if (minute <= 9) minute = '0' + minute;
+        if (second <= 9) second = '0' + second;
+        
+        $(".timeNum").text(second);
+        intDiff--;
+        
+        // 判断当秒数为0的时候停止运行
+        if (second == 00) {
+            clearInterval(timing);
+            clearInterval(circle);
+            console.log(second + "秒，被停止");
+            
+            // Calculate final accuracy
+            var finalAccuracy = calculateAccuracy();
+            
+            setTimeout(function() {
+                // Show game over screen
+                $(".gameOverBox").show();
+                
+                // Display accuracy instead of score
+                $('#settlementNum').text(finalAccuracy + "%");
+                
+                // Hide other game elements
+                $(".scoreBox").hide();
+                $(".listBOx").hide();
+                $(".lolgBox").hide();
+            }, 500);
+        }        
+    }, 1000);
+}
+
 
 // 背景音乐点击事件
 $("#musicBtn").on("click", function() {
@@ -116,6 +150,7 @@ $(".start").on("click", function() {
 	star(); // 第一次游戏的函数
 });
 
+/*
 // 重新开始函数
 $(".restart").on("click", function() {
     console.log("执行重新开始玩");
@@ -138,6 +173,35 @@ $(".restart").on("click", function() {
     timer(gemeTime);
     star();
 })
+*/
+
+// Fixed restart button function
+$(".restart").on("click", function() {
+    console.log("执行重新开始玩");
+    $(".gameOverBox").hide();
+    
+    // Reset tracking variables
+    totalHits = 0;
+    correctHits = 0;
+    wrongHits = 0;
+    s = 0;
+    
+    $(".scoreNum").text("0");
+    // Reset settlement display
+    $("#settlementNum").text("0%");
+    $(".timeNum").text("30");
+    
+    // Show game elements again
+    $(".scoreBox").show();
+    $(".listBOx").show();
+    $(".lolgBox").show();
+    
+    timer(gemeTime);
+    star();
+});
+
+
+
 
 // 榜单按钮
 $(".btn_ranking").on("click", function() {
