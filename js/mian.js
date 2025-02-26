@@ -59,7 +59,7 @@ function timer(intDiff) {
 		    
 		    // Calculate final accuracy
 		    var finalAccuracy = calculateAccuracy();
-		    
+		/*    
 		    setTimeout(function() {
 		        $(".gameOverBox").show();
 		        // Display accuracy instead of score
@@ -69,6 +69,22 @@ function timer(intDiff) {
 		        $(".listBOx").toggle();
 		        $(".lolgBox").toggle();
 		    }, 500)
+      		*/
+
+			setTimeout(function() {
+			    $(".gameOverBox").fadeIn(300); // Smoothly show gameOverBox
+			
+			    // Ensure these elements are hidden only at game end
+			    $(".scoreBox").hide();
+			    $(".listBOx").hide();
+			    $(".lolgBox").hide();
+			
+			    // Show final accuracy
+			    $('#settlementNum').text("準確度：" + finalAccuracy + "%");
+			}, 500);
+				
+
+			
 		}		
 	}, 1000);
 }
