@@ -368,5 +368,5 @@ function star() {
 $(".analysis").on("click", function() {
 	mixpanel.track('Click Game Result Analysis');
     // Replace with your desired URL
-    window.location.href = "https://www.sooooz.com";
+    window.location.href = "https://sooooz.com/soo-challenge#sooanalysis";
 });
